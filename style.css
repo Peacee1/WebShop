@@ -1,14 +1,16 @@
+:root {
+  --font-size-normal: 16px;
+  --font-size-small: 8px;
+}
 .html {
-  width: 1100px;
+  width: 100%;
   height: auto;
   margin: 0 50px;
   background-color: white;
-  font-size: 16px;
+  font-size: var(--font-size-normal);
 }
-@media only screen and (max-width: 900px) {
-  .html {
-    font-size: 8px;
-  }
+.body {
+  font-size: var(--font-size-normal);
 }
 .head {
   display: flex;
@@ -65,7 +67,7 @@
   height: 40px;
   width: 5%;
   transition: background-color 0.3s ease;
-  font-size: 1.1em;
+  font-size: 1.1rem;
 }
 .search {
   border: 1px solid white;
@@ -77,4 +79,16 @@
 }
 .head .op-button:hover {
   background-color: #ded5d5;
+}
+@media only screen and (max-width: 900px) {
+  .html {
+    font-size: var(--font-size-small);
+  }
+  .head {
+    background-color: aqua;
+    font-size: var(--font-size-small);
+  }
+  .op-button {
+    font-size: var(--font-size-small);
+  }
 }
