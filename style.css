@@ -1,67 +1,184 @@
-.html {
-  font-size: 16px;
-}
-.body {
-  display: flex;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Poppins:wght@300&display=swap");
+body {
+  font-family: "Poppin", sans-serif;
+  background-color: #4d4d4d;
 }
 .head {
   display: flex;
+  font-family: "Poppin", sans-serif;
   justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  height: 2.5rem;
-  font-size: 1rem;
+  flex-wrap: nowrap;
 }
-.head a {
-  text-decoration: none;
-  color: black;
-}
-.head-logo {
-  margin: 0px 1.25rem;
-}
-.option {
-  display: flex;
-  height: 2.5rem;
-  font-size: 1rem;
-  justify-content: space-between;
+.fixed-box {
   background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  font-family: "Poppin", sans-serif;
+  position: fixed;
+  transform: translate(-50%, 0);
+  color: white;
+  padding: 20px;
+  border-radius: 20px;
+  left: 50%;
+}
+.ans {
+  display: flex;
+}
+.fixed-box a {
+  display: flex;
+  background-color: #e5a947;
+  border-radius: 5px;
+  width: 40px;
+  text-decoration: none;
+  height: 20px;
+  margin: 5px 5px;
+  color: white;
+  justify-content: center;
   align-items: center;
 }
-.option a {
-  text-decoration: none;
+.head p {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 30px;
+  padding: 5px 10px;
+  background-color: white;
+}
+.login {
+  margin: 20px 30px;
+}
+.login button {
+  border: none;
+  padding: 10px;
+  background-color: #e5a947;
+  border-radius: 10px;
+  width: 100px;
+  transition: all 0.3s ease;
+}
+.login button:hover {
+  background-color: black;
+  color: white;
+}
+.search {
+  margin: 20px 30px;
+  padding: 10px;
+  background-color: black;
+  width: 20%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+.head2 i {
+  font-size: 44px;
+  margin: 0 30px;
+}
+.search i {
+  color: white;
+  font-size: 24px;
+}
+.search input {
+  margin-right: 10px;
+  border-radius: 5px;
+  height: 60%;
+  width: 60%;
+}
+.cart {
+  transition: background-color 0.3s ease;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 30px;
+}
+.cart:hover {
+  background-color: black;
   color: white;
 }
 
-.head-option {
-  margin: 0px 1.25rem;
-}
-.option-logo {
-  margin: 0px 1.25rem;
-}
-i {
-  color: white;
-  font-size: 1.5rem;
-}
-.search {
+.head2 {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
-.op-button {
-  height: 2.5rem;
-  width: 5rem;
-  margin: 0px 1rem;
-  font-size: auto;
-  border: 1px solid red;
-  text-align: center;
-  justify-content: center;
-}
-.option-option {
+.product {
   display: flex;
-  flex-wrap: nowrap;
+  width: 100%;
+  flex-direction: column;
 }
-@media only screen and (max-width: 450px) {
-  html {
-    font-size: 10px;
-  }
+.option {
+  display: flex;
+  margin: 0 30px;
+}
+.op-button {
+  text-decoration: none;
+  color: white;
+  padding: 0 10px;
+  background-color: black;
+  width: 13%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+.op-button:hover {
+  background-color: #201f1f;
+}
+.nonedisplaybox {
+  margin: 0 30px;
+  background-color: white;
+  display: none;
+  height: auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+}
+.element {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 286px;
+  max-width: 300px;
+  align-items: center;
+  padding: 10px 0px;
+  margin: 10px 10px;
+  background-color: #e5a947;
+}
+.element img {
+  width: 100px;
+  margin: 10px;
+}
+.cartbox {
+  position: fixed;
+  background-color: black;
+  width: 400px;
+  min-height: 300px;
+  bottom: 0px;
+  right: 30px;
+  border-radius: 30px;
+  transition: transform 0.3s ease;
+  transform: translateY(100%);
+  border: 2px solid white;
+}
+.cartbox-head {
+  color: white;
+  margin: 10px 20px;
+  font-size: 24px;
+}
+.total {
+  margin: 10px 20px;
+  color: white;
+}
+.cartbox button {
+  background-color: #e5a947;
+  padding: 10px;
+  margin: 10px 20px;
 }
