@@ -169,6 +169,8 @@ body {
   transition: transform 0.3s ease;
   transform: translateY(100%);
   border: 2px solid white;
+  max-height: 600px;
+  overflow: auto;
 }
 .cartbox-head {
   color: white;
@@ -183,4 +185,9 @@ body {
   background-color: #e5a947;
   padding: 10px;
   margin: 10px 20px;
+  width: 90px;
+}
+.cart-item {
+  color: white;
+  margin: 0 30px;
 }
