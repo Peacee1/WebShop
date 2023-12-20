@@ -109,7 +109,8 @@ document.addEventListener("DOMContentLoaded", function () {
    */
   document.querySelector("#clear").addEventListener("click", () => {
     document.querySelector("#cart-product").innerHTML = "";
-    document.getElementById("total").innerHTML = 0;
+    total = 0;
+    document.getElementById("total").innerHTML = total;
     yourcart.splice(0, yourcart.length);
   });
 });
