@@ -1,27 +1,91 @@
 document.addEventListener("DOMContentLoaded", function () {
   const picsSpace = [
-    { id: "1", name: "cat meme #1", price: 2, srcpic: "./pics/pic1.jpg" },
-    { id: "2", name: "cat meme #2", price: 2, srcpic: "./pics/pic2.jpg" },
-    { id: "3", name: "cat meme #3", price: 2, srcpic: "./pics/pic3.jpg" },
-    { id: "4", name: "cat meme #4", price: 2, srcpic: "./pics/pic4.jpg" },
-    { id: "5", name: "cat meme #5", price: 2, srcpic: "./pics/pic5.jpg" },
-    { id: "6", name: "cat meme #6", price: 2, srcpic: "./pics/pic6.jpg" },
-    { id: "7", name: "cat meme #7", price: 2, srcpic: "./pics/pic7.jpg" },
-    { id: "8", name: "cat meme #8", price: 2, srcpic: "./pics/pic8.jpg" },
-    { id: "9", name: "cat meme #9", price: 2, srcpic: "./pics/pic9.jpg" },
-    { id: "10", name: "cat meme #10", price: 2, srcpic: "./pics/pic10.jpg" },
-    { id: "11", name: "cat meme #11", price: 2, srcpic: "./pics/pic11.jpg" },
-    { id: "12", name: "cat meme #12", price: 2, srcpic: "./pics/pic12.jpg" },
-    { id: "13", name: "cat meme #13", price: 2, srcpic: "./pics/pic13.jpg" },
-    { id: "14", name: "cat meme #14", price: 2, srcpic: "./pics/pic14.jpg" },
-    { id: "15", name: "cat meme #15", price: 2, srcpic: "./pics/pic15.jpg" },
-    { id: "16", name: "cat meme #16", price: 2, srcpic: "./pics/pic16.jpg" },
-    { id: "17", name: "cat meme #17", price: 2, srcpic: "./pics/pic17.jpg" },
-    { id: "18", name: "cat meme #18", price: 2, srcpic: "./pics/pic18.jpg" },
-    { id: "19", name: "cat meme #19", price: 2, srcpic: "./pics/pic19.jpg" },
-    { id: "20", name: "cat meme #20", price: 2, srcpic: "./pics/pic20.jpg" },
-    { id: "21", name: "cat meme #21", price: 2, srcpic: "./pics/pic21.jpg" },
+    { id: "P1", name: "cat pics #1", price: 2, srcpic: "./pics/pic1.jpg" },
+    { id: "P2", name: "cat pics #2", price: 2, srcpic: "./pics/pic2.jpg" },
+    { id: "P3", name: "cat pics #3", price: 2, srcpic: "./pics/pic3.jpg" },
+    { id: "P4", name: "cat pics #4", price: 2, srcpic: "./pics/pic4.jpg" },
+    { id: "P5", name: "cat pics #5", price: 2, srcpic: "./pics/pic5.jpg" },
+    { id: "P6", name: "cat pics #6", price: 2, srcpic: "./pics/pic6.jpg" },
+    { id: "P7", name: "cat pics #7", price: 2, srcpic: "./pics/pic7.jpg" },
+    { id: "P8", name: "cat pics #8", price: 2, srcpic: "./pics/pic8.jpg" },
+    { id: "P9", name: "cat pics #9", price: 2, srcpic: "./pics/pic9.jpg" },
+    { id: "P10", name: "cat pics #10", price: 2, srcpic: "./pics/pic10.jpg" },
+    { id: "P11", name: "cat pics #11", price: 2, srcpic: "./pics/pic11.jpg" },
+    { id: "P12", name: "cat pics #12", price: 2, srcpic: "./pics/pic12.jpg" },
+    { id: "P13", name: "cat pics #13", price: 2, srcpic: "./pics/pic13.jpg" },
+    { id: "P14", name: "cat pics #14", price: 2, srcpic: "./pics/pic14.jpg" },
+    { id: "P15", name: "cat pics #15", price: 2, srcpic: "./pics/pic15.jpg" },
+    { id: "P16", name: "cat pics #16", price: 2, srcpic: "./pics/pic16.jpg" },
+    { id: "P17", name: "cat pics #17", price: 2, srcpic: "./pics/pic17.jpg" },
+    { id: "P18", name: "cat pics #18", price: 2, srcpic: "./pics/pic18.jpg" },
+    { id: "P19", name: "cat pics #19", price: 2, srcpic: "./pics/pic19.jpg" },
+    { id: "P20", name: "cat pics #20", price: 2, srcpic: "./pics/pic20.jpg" },
+    { id: "P21", name: "cat pics #21", price: 2, srcpic: "./pics/pic21.jpg" },
   ];
+  const memeSpace = [
+    { id: "M1", name: "cat meme #1", price: 2, srcpic: "./meme/meme1.jpg" },
+    { id: "M2", name: "cat meme #2", price: 2, srcpic: "./meme/meme2.jpg" },
+    { id: "M3", name: "cat meme #3", price: 2, srcpic: "./meme/meme3.jpg" },
+    { id: "M4", name: "cat meme #4", price: 2, srcpic: "./meme/meme4.jpg" },
+    { id: "M5", name: "cat meme #5", price: 2, srcpic: "./meme/meme5.jpg" },
+    { id: "M6", name: "cat meme #6", price: 2, srcpic: "./meme/meme6.jpg" },
+    { id: "M7", name: "cat meme #7", price: 2, srcpic: "./meme/meme7.jpg" },
+  ];
+  const renderListProduct = (wrapperElement, data) => {
+    // wrapperElement: div mình apppend element vào
+    // data: danh sách
+    wrapperElement.innerHTML = "";
+    data.forEach((obj) => {
+      const element = document.createElement("div");
+      element.className = "element";
+      const elementpics = document.createElement("img");
+      elementpics.src = `${obj.srcpic}`;
+      elementpics.alt = "cat meme";
+      const elementName = document.createElement("p");
+      elementName.innerHTML = `${obj.name}`;
+      const elementPrice = document.createElement("p");
+      elementPrice.innerHTML = `Price: ${obj.price}$`;
+      const Buybtn = document.createElement("button");
+      Buybtn.className = "add";
+      Buybtn.id = `${obj.id}`;
+      Buybtn.innerHTML = "Buy";
+      element.appendChild(elementpics);
+      element.appendChild(elementName);
+      element.appendChild(elementPrice);
+      element.appendChild(Buybtn);
+      wrapperElement.appendChild(element);
+    });
+  };
+  function renderCart(cartSpace, cartList) {
+    cartSpace.innerHTML = "";
+    cartList.forEach((cartobj) => {
+      let cartItem = document.createElement("div");
+      cartItem.className = "cart-item";
+      let item = document.createElement("div");
+      item.className = "item";
+      item.innerHTML = `${cartobj.name} price:${cartobj.price}$`;
+      let addBtn = document.createElement("a");
+      addBtn.className = "add-item";
+      addBtn.innerHTML = "+";
+      addBtn.id = `A${cartobj.id}`;
+      let reduceBtn = document.createElement("a");
+      reduceBtn.className = "reduce-item";
+      reduceBtn.innerHTML = "-";
+      reduceBtn.id = `R${cartobj.id}`;
+      let deleteBtn = document.createElement("a");
+      deleteBtn.className = "delete-item";
+      deleteBtn.innerHTML = "x";
+      deleteBtn.id = `D${cartobj.id}`;
+      let quantity = document.createElement("p");
+      quantity.innerHTML = `SL:${cartobj.quantity}`;
+      cartItem.appendChild(item);
+      cartItem.appendChild(quantity);
+      cartItem.appendChild(addBtn);
+      cartItem.appendChild(reduceBtn);
+      cartItem.appendChild(deleteBtn);
+      cartSpace.appendChild(cartItem);
+    });
+  }
   //click cho picsbutton and memebutton
   const productPicsElement = document.getElementById("product-pics");
   productPicsElement.addEventListener("click", () => {
@@ -33,19 +97,16 @@ document.addEventListener("DOMContentLoaded", function () {
       picsButton.style.display = "none";
     }
     memeButton.style.display = "none";
-    let dataPics = "";
     picsSpace.forEach((obj) => {
-      dataPics += `
-      <div class="element">
-        <img src="${obj.srcpic}" alt="cat meme" />
-        <p>${obj.name}</p>
-        <p>Price: ${obj.price}$</p>
-      <button class="add" id="${obj.id}">Buy</button></div>
-      `;
+      renderListProduct(picsButton, picsSpace);
+      let search = document.getElementById("search");
+      if (picsButton.style.display == "flex") {
+        search.placeholder = "Search in pics...";
+      } else {
+        search.placeholder = "Search...";
+      }
     });
-    document.getElementById("nonedisplaybox1").innerHTML = dataPics;
   });
-
   const productMemeElement = document.getElementById("product-meme");
   productMemeElement.addEventListener("click", () => {
     const picsButton = document.getElementById("nonedisplaybox1");
@@ -56,13 +117,17 @@ document.addEventListener("DOMContentLoaded", function () {
       memeButton.style.display = "none";
     }
     picsButton.style.display = "none";
+    memeSpace.forEach((obj) => {
+      renderListProduct(memeButton, memeSpace);
+      let search = document.getElementById("search");
+      if (memeButton.style.display == "flex") {
+        search.placeholder = "Search in meme...";
+      } else {
+        search.placeholder = "Search...";
+      }
+    });
   });
-  /*tạo sự kiện click cho giỏ hàng
-   *
-   *
-   *
-   *
-   * */
+  /*   tạo sự kiện click cho giỏ hàng */
   const cart = document.getElementById("cart");
   cart.addEventListener("click", function () {
     const cartbox = document.getElementById("cartbox");
@@ -73,11 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  /*
-   *
-   *
-   *
-   */
+  /* edit giỏ hàng ở pics*/
   const yourcart = [];
   let total = 0;
   document
@@ -87,30 +148,91 @@ document.addEventListener("DOMContentLoaded", function () {
         const i = event.target.getAttribute("id");
         picsSpace.forEach((obj) => {
           if (obj.id == i) {
-            yourcart.push(obj);
-            total += obj.price;
+            const check = yourcart.find((item) => item.id === i);
+            if (!check) {
+              obj.quantity = 1;
+              yourcart.push(obj);
+              total += obj.price;
+            } else {
+              total += obj.price;
+              obj.quantity = obj.quantity + 1;
+            }
           }
         });
       }
-      let cartdata = "";
-      yourcart.forEach((cartobj) => {
-        cartdata += `
-      <div class="cart-item">${cartobj.name} price:${cartobj.price}$</div>
-      `;
-      });
       const cartPro = document.getElementById("cart-product");
-      cartPro.innerHTML = cartdata;
+      renderCart(cartPro, yourcart);
       document.getElementById("total").innerHTML = total;
     });
-  /*
-   *
-   *
-   *
-   */
+  /*edit giỏ hàng ở meme */
+  document
+    .querySelector("#nonedisplaybox2")
+    .addEventListener("click", (event) => {
+      if (event.target.classList.contains("add")) {
+        const i = event.target.getAttribute("id");
+        memeSpace.forEach((obj) => {
+          if (obj.id == i) {
+            const check = yourcart.find((item) => item.id === i);
+            if (!check) {
+              obj.quantity = 1;
+              yourcart.push(obj);
+              total += obj.price;
+            } else {
+              total += obj.price;
+              obj.quantity = obj.quantity + 1;
+            }
+          }
+        });
+      }
+      const cartPro = document.getElementById("cart-product");
+      renderCart(cartPro, yourcart);
+
+      document.getElementById("total").innerHTML = total;
+    });
   document.querySelector("#clear").addEventListener("click", () => {
     document.querySelector("#cart-product").innerHTML = "";
     total = 0;
     document.getElementById("total").innerHTML = total;
     yourcart.splice(0, yourcart.length);
+  });
+  // thêm sửa xoá giỏ hàng
+  const cartPro = document.getElementById("cart-product");
+  cartPro.addEventListener("click", (event) => {
+    if (event.target.classList.contains("delete-item")) {
+      let i = event.target.getAttribute("id").slice(1);
+      yourcart.forEach((item, index) => {
+        if (item.id == i) {
+          yourcart.splice(index, 1);
+          total -= item.price * item.quantity;
+          renderCart(cartPro, yourcart);
+          document.getElementById("total").innerHTML = total;
+        }
+      });
+    }
+    if (event.target.classList.contains("add-item")) {
+      let i = event.target.getAttribute("id").slice(1);
+      yourcart.forEach((item, index) => {
+        if (item.id == i) {
+          item.quantity = item.quantity + 1;
+          total += item.price;
+          renderCart(cartPro, yourcart);
+          document.getElementById("total").innerHTML = total;
+        }
+      });
+    }
+    if (event.target.classList.contains("reduce-item")) {
+      let i = event.target.getAttribute("id").slice(1);
+      yourcart.forEach((item, index) => {
+        if (item.id == i) {
+          item.quantity = item.quantity - 1;
+          total -= item.price;
+          if (item.quantity == 0) {
+            yourcart.splice(index, 1);
+          }
+          renderCart(cartPro, yourcart);
+          document.getElementById("total").innerHTML = total;
+        }
+      });
+    }
   });
 });
