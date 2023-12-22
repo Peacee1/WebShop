@@ -137,7 +137,6 @@ body {
 }
 .nonedisplaybox {
   margin: 0 30px;
-  background-color: white;
   display: none;
   height: auto;
   flex-wrap: wrap;
@@ -214,4 +213,12 @@ body {
 }
 .reduce-item:hover {
   color: #e5a947;
+}
+.search-notification {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  color: #e5a947;
+  align-items: center;
+  justify-content: center;
 }

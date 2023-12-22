@@ -31,6 +31,10 @@ document.addEventListener("DOMContentLoaded", function () {
     { id: "M6", name: "cat meme #6", price: 2, srcpic: "./meme/meme6.jpg" },
     { id: "M7", name: "cat meme #7", price: 2, srcpic: "./meme/meme7.jpg" },
   ];
+
+  const productSpace = [...picsSpace, ...memeSpace];
+  const picsButton = document.getElementById("nonedisplaybox1");
+  const memeButton = document.getElementById("nonedisplaybox2");
   const renderListProduct = (wrapperElement, data) => {
     // wrapperElement: div mình apppend element vào
     // data: danh sách
@@ -89,14 +93,13 @@ document.addEventListener("DOMContentLoaded", function () {
   //click cho picsbutton and memebutton
   const productPicsElement = document.getElementById("product-pics");
   productPicsElement.addEventListener("click", () => {
-    const picsButton = document.getElementById("nonedisplaybox1");
-    const memeButton = document.getElementById("nonedisplaybox2");
     if (picsButton.style.display !== "flex") {
       picsButton.style.display = "flex";
     } else {
       picsButton.style.display = "none";
     }
     memeButton.style.display = "none";
+    searchSpace.style.display = "none";
     picsSpace.forEach((obj) => {
       renderListProduct(picsButton, picsSpace);
       let search = document.getElementById("search");
@@ -109,14 +112,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   const productMemeElement = document.getElementById("product-meme");
   productMemeElement.addEventListener("click", () => {
-    const picsButton = document.getElementById("nonedisplaybox1");
-    const memeButton = document.getElementById("nonedisplaybox2");
     if (memeButton.style.display !== "flex") {
       memeButton.style.display = "flex";
     } else {
       memeButton.style.display = "none";
     }
     picsButton.style.display = "none";
+    searchSpace.style.display = "none";
     memeSpace.forEach((obj) => {
       renderListProduct(memeButton, memeSpace);
       let search = document.getElementById("search");
@@ -233,6 +235,39 @@ document.addEventListener("DOMContentLoaded", function () {
           document.getElementById("total").innerHTML = total;
         }
       });
+    }
+  });
+  //Thanh tìm kiếm
+  const searchSpace = document.getElementById("searchSpace");
+  const searchInput = document.getElementById("search");
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      const searchItem = [];
+      if (searchSpace.style.display !== "flex") {
+        searchSpace.style.display = "flex";
+      }
+      const search_input_value = searchInput.value;
+      productSpace.find((item) => {
+        //so sanh bang
+        if (item.name == search_input_value) {
+          searchItem.push(item);
+        }
+        //index of js
+
+        //includes js
+
+        //tim kiem khong dau js
+      });
+      console.log(productSpace);
+      if (searchItem.length == 0) {
+        console.log(10);
+        const search_notification = document.createElement("p");
+        search_notification.className = "search-notification";
+        search_notification.innerHTML = "Không tìm thấy sản phẩm nào!!!";
+        searchSpace.appendChild(search_notification);
+      } else {
+        renderListProduct(searchSpace, searchItem);
+      }
     }
   });
 });
