@@ -98,6 +98,8 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       picsButton.style.display = "none";
     }
+    memeButton.style.display = "none";
+    searchSpace.style.display = "none";
     picsSpace.forEach((obj) => {
       renderListProduct(picsButton, picsSpace);
       let search = document.getElementById("search");
@@ -189,29 +191,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       document.getElementById("total").innerHTML = total;
     });
-  //edit giỏ hàng ở find
-  document.querySelector("#searchSpace").addEventListener("click", (event) => {
-    if (event.target.classList.contains("add")) {
-      const i = event.target.getAttribute("id");
-      searchSpace.forEach((obj) => {
-        if (obj.id == i) {
-          const check = yourcart.find((item) => item.id === i);
-          if (!check) {
-            obj.quantity = 1;
-            yourcart.push(obj);
-            total += obj.price;
-          } else {
-            total += obj.price;
-            obj.quantity = obj.quantity + 1;
-          }
-        }
-      });
-    }
-    const cartPro = document.getElementById("cart-product");
-    renderCart(cartPro, yourcart);
-
-    document.getElementById("total").innerHTML = total;
-  });
 
   document.querySelector("#clear").addEventListener("click", () => {
     document.querySelector("#cart-product").innerHTML = "";
@@ -263,12 +242,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchSpace = document.getElementById("searchSpace");
   const searchInput = document.getElementById("search");
   searchInput.addEventListener("keydown", (event) => {
+    const searchItem = [];
     if (event.key === "Enter") {
       searchSpace.innerHTML = "";
       picsButton.style.display = "none";
       memeButton.style.display = "none";
       searchSpace.style.display = "none";
-      const searchItem = [];
       if (searchSpace.style.display !== "flex") {
         searchSpace.style.display = "flex";
       }
@@ -294,5 +273,31 @@ document.addEventListener("DOMContentLoaded", function () {
         renderListProduct(searchSpace, searchItem);
       }
     }
+    //edit giỏ hàng ở search
+    document
+      .querySelector("#searchSpace")
+      .addEventListener("click", (event) => {
+        if (event.target.classList.contains("add")) {
+          console.log(5);
+          const i = event.target.getAttribute("id");
+          searchItem.forEach((obj) => {
+            if (obj.id == i) {
+              const check = yourcart.find((item) => item.id === i);
+              if (!check) {
+                obj.quantity = 1;
+                yourcart.push(obj);
+                total += obj.price;
+              } else {
+                total += obj.price;
+                obj.quantity = obj.quantity + 1;
+              }
+            }
+          });
+        }
+        const cartPro = document.getElementById("cart-product");
+        renderCart(cartPro, yourcart);
+
+        document.getElementById("total").innerHTML = total;
+      });
   });
 });
