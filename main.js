@@ -98,8 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       picsButton.style.display = "none";
     }
-    memeButton.style.display = "none";
-    searchSpace.style.display = "none";
     picsSpace.forEach((obj) => {
       renderListProduct(picsButton, picsSpace);
       let search = document.getElementById("search");
@@ -242,6 +240,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.getElementById("search");
   searchInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
+      searchSpace.innerHTML = "";
+      searchSpace.style.display = "none";
+      memeButton.style.display = "none";
+      searchSpace.style.display = "none";
       const searchItem = [];
       if (searchSpace.style.display !== "flex") {
         searchSpace.style.display = "flex";
@@ -249,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const search_input_value = searchInput.value;
       productSpace.find((item) => {
         //so sanh bang
-        if (item.name == search_input_value) {
+        if (item.name.includes(search_input_value)) {
           searchItem.push(item);
         }
         //index of js
@@ -260,7 +262,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       console.log(productSpace);
       if (searchItem.length == 0) {
-        console.log(10);
         const search_notification = document.createElement("p");
         search_notification.className = "search-notification";
         search_notification.innerHTML = "Không tìm thấy sản phẩm nào!!!";
