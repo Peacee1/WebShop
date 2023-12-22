@@ -195,7 +195,23 @@ body {
   margin: 0 30px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.delete-item {
+  font-size: 20px;
+}
+.reduce-item {
+  font-size: 20px;
+}
+.add-item {
+  font-size: 20px;
 }
 .delete-item:hover {
+  color: #e5a947;
+}
+.add-item:hover {
+  color: #e5a947;
+}
+.reduce-item:hover {
   color: #e5a947;
 }
