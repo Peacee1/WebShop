@@ -189,6 +189,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
       document.getElementById("total").innerHTML = total;
     });
+  //edit giỏ hàng ở find
+  document.querySelector("#searchSpace").addEventListener("click", (event) => {
+    if (event.target.classList.contains("add")) {
+      const i = event.target.getAttribute("id");
+      searchSpace.forEach((obj) => {
+        if (obj.id == i) {
+          const check = yourcart.find((item) => item.id === i);
+          if (!check) {
+            obj.quantity = 1;
+            yourcart.push(obj);
+            total += obj.price;
+          } else {
+            total += obj.price;
+            obj.quantity = obj.quantity + 1;
+          }
+        }
+      });
+    }
+    const cartPro = document.getElementById("cart-product");
+    renderCart(cartPro, yourcart);
+
+    document.getElementById("total").innerHTML = total;
+  });
+
   document.querySelector("#clear").addEventListener("click", () => {
     document.querySelector("#cart-product").innerHTML = "";
     total = 0;
@@ -241,7 +265,7 @@ document.addEventListener("DOMContentLoaded", function () {
   searchInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
       searchSpace.innerHTML = "";
-      searchSpace.style.display = "none";
+      picsButton.style.display = "none";
       memeButton.style.display = "none";
       searchSpace.style.display = "none";
       const searchItem = [];
