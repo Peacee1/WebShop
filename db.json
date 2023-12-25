@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "peacee1",
+      "password": "saocxdc",
+      "account_balance": "1000000"
+    },
+    {
+      "username": "peacee2",
+      "password": "saocxdc",
+      "account_balance": "0",
+      "id": 2
+    },
+    {
+      "username": "peacee3",
+      "password": "saocxdc",
+      "account_balance": "0",
+      "id": 3
+    }
+  ]
+}

@@ -1,4 +1,32 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const user_logint = `<button class="log_in">Log in</button>
+  <button class="sign_up">Sign up</button>`;
+  let userSpace = document.querySelector(".user");
+  userSpace.innerHTML = user_logint;
+  const header = `<div class="head2">
+  <div class="search">
+    <i class="bx bx-search"></i>
+    <input id="search" placeholder="Search..." type="text" />
+  </div>
+  <div id="cart" class="cart"><i class="bx bx-cart"></i></div>
+</div>
+<div class="product">
+  <div class="option">
+    <a class="op-button" id="product-pics">Pics</a>
+    <a class="op-button" id="product-meme">Meme</a>
+    <a class="op-button" href="">Post</a>
+  </div>
+  <div id="nonedisplaybox1" class="nonedisplaybox"></div>
+  <div id="nonedisplaybox2" class="nonedisplaybox"></div>
+  <div id="searchSpace" class="nonedisplaybox"></div>
+</div>`;
+  let container = document.querySelector(".container");
+  container.innerHTML = header;
+  const User = [
+    { user: "peacee1Admin", password: "saocxdc", maccount_balance: "1000000" },
+  ];
+  const url = "http://localhost:8000/users";
+  let loginBox = document.querySelector(".loginBox");
   const picsSpace = [
     { id: "P1", name: "cat pics #1", price: 2, srcpic: "./pics/pic1.jpg" },
     { id: "P2", name: "cat pics #2", price: 2, srcpic: "./pics/pic2.jpg" },
@@ -110,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+  //click cho picsbutton and memebutton
   const productMemeElement = document.getElementById("product-meme");
   productMemeElement.addEventListener("click", () => {
     if (memeButton.style.display !== "flex") {
@@ -140,6 +169,119 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  //logIn
+  document.querySelector(".log_in").addEventListener("click", () => {
+    const log_in = document.createElement("div");
+    log_in.className = "login";
+    const Ech_img = document.createElement("img");
+    Ech_img.src = "./echngu.png";
+    log_in.appendChild(Ech_img);
+    const log_in_container = document.createElement("div");
+    log_in_container.className = "login-box";
+    log_in.appendChild(log_in_container);
+    const username = document.createElement("input");
+    const password = document.createElement("input");
+    username.placeholder = "user";
+    username.type = "text";
+    password.placeholder = "password";
+    password.type = "password";
+    log_in_container.appendChild(username);
+    log_in_container.appendChild(password);
+    const loginBTN = document.createElement("button");
+    loginBTN.innerHTML = "Log in";
+    log_in_container.appendChild(loginBTN);
+    loginBox.innerHTML = "";
+    loginBox.appendChild(log_in);
+    loginBTN.addEventListener("click", () => {
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          data.forEach((user) => {
+            if (
+              username.value == user.username &&
+              password.value == user.password
+            ) {
+              userSpace.innerHTML = `user: ${user.username} <br> Account balance:${user.account_balance}$ `;
+              loginBox.innerHTML = "";
+              user.account_status = "1";
+            }
+          });
+        })
+        .catch((error) => {
+          console.error("Lỗi khi lấy dữ liệu:", error);
+        });
+    });
+  });
+  //signUp
+  document.querySelector(".sign_up").addEventListener("click", () => {
+    const sign_up = document.createElement("div");
+    sign_up.className = "login";
+    const Ech_img = document.createElement("img");
+    Ech_img.src = "./echngu.png";
+    sign_up.appendChild(Ech_img);
+    const sign_up_container = document.createElement("div");
+    sign_up_container.className = "login-box";
+    sign_up.appendChild(sign_up_container);
+    const username = document.createElement("input");
+    const password = document.createElement("input");
+    username.placeholder = "user";
+    username.type = "text";
+    password.placeholder = "password";
+    password.type = "password";
+    sign_up_container.appendChild(username);
+    sign_up_container.appendChild(password);
+    const signupBTN = document.createElement("button");
+    signupBTN.innerHTML = "Sign up";
+    sign_up_container.appendChild(signupBTN);
+    loginBox.innerHTML = "";
+    loginBox.appendChild(sign_up);
+    signupBTN.addEventListener("click", () => {
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Dữ liệu từ server:", data);
+
+          // Duyệt qua từng phần tử trong mảng
+          let peacee1 = 0;
+          data.forEach((user) => {
+            if (username.value == user.username) {
+              peacee1 += 1;
+              alert("Username đã tồn tại");
+            }
+            if (username.value == "" || password.value == "") {
+              peacee1 += 1;
+              alert("Bỏ trống");
+            }
+          });
+          if (peacee1 == 0) {
+            const userData = {
+              username: username.value,
+              password: password.value,
+              account_balance: "0",
+              account_status: "0",
+            };
+            fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                alert(`Đã thêm người dùng mới:${userData.username}`, data);
+                loginBox.innerHTML = "";
+              })
+              .catch((error) => {
+                alert("Lỗi khi thêm người dùng:", error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.error("Lỗi khi lấy dữ liệu:", error);
+        });
+    });
+  });
   /* edit giỏ hàng ở pics*/
   const yourcart = [];
   let total = 0;
@@ -191,7 +333,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       document.getElementById("total").innerHTML = total;
     });
-
+  //Nút clear
   document.querySelector("#clear").addEventListener("click", () => {
     document.querySelector("#cart-product").innerHTML = "";
     total = 0;
@@ -248,6 +390,7 @@ document.addEventListener("DOMContentLoaded", function () {
       picsButton.style.display = "none";
       memeButton.style.display = "none";
       searchSpace.style.display = "none";
+
       if (searchSpace.style.display !== "flex") {
         searchSpace.style.display = "flex";
       }
@@ -278,7 +421,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .querySelector("#searchSpace")
       .addEventListener("click", (event) => {
         if (event.target.classList.contains("add")) {
-          console.log(5);
           const i = event.target.getAttribute("id");
           searchItem.forEach((obj) => {
             if (obj.id == i) {
@@ -298,6 +440,20 @@ document.addEventListener("DOMContentLoaded", function () {
         renderCart(cartPro, yourcart);
 
         document.getElementById("total").innerHTML = total;
+      });
+  });
+  const buyBTN = document.querySelector(".buy");
+  buyBTN.addEventListener("click", () => {
+    console.log(6);
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        data.forEach((user) => {
+          if (user.account_balance < total) {
+            alert("Bạn ko đủ tiền");
+          } else {
+          }
+        });
       });
   });
 });

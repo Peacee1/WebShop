@@ -1,0 +1,35 @@
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    // data là mảng chứa tất cả các phần tử trong USERS
+    console.log('Dữ liệu từ server:', data);
+
+    // Duyệt qua từng phần tử trong mảng
+    data.forEach(user => {
+      console.log('ID:', user.id);
+      console.log('Username:', user.username);
+      console.log('Password:', user.password);
+      console.log('Account Balance:', user.maccount_balance);
+      console.log('-----------------------');
+    });
+  })
+  .catch(error => {
+    console.error('Lỗi khi lấy dữ liệu:', error);
+  });
+
+-----------------------------------------------------------------
+
+fetch(url, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(userData),
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log('Đã thêm người dùng mới:', data);
+  })
+  .catch(error => {
+    console.error('Lỗi khi thêm người dùng:', error);
+  });
