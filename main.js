@@ -1,4 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // //hàm đọc file
+  // function uploadImage(element) {
+  //   const file = element.files[0];
+  //   const reader = new FileReader();
+  //   reader.onload = function (e) {
+  //     var imageUrl = e.target.result;
+  //     console.log("Đường link ảnh:", imageUrl);
+  //   };
+  // }
+  let this_user_ID = 0;
+  let this_account_balance = 0;
+  let this_purchase_history = [];
   const user_logint = `<button class="log_in">Log in</button>
   <button class="sign_up">Sign up</button>`;
   let userSpace = document.querySelector(".user");
@@ -14,10 +26,11 @@ document.addEventListener("DOMContentLoaded", function () {
   <div class="option">
     <a class="op-button" id="product-pics">Pics</a>
     <a class="op-button" id="product-meme">Meme</a>
-    <a class="op-button" href="">Post</a>
+    <a class="op-button" id="postAndchatbox">Post</a>
   </div>
   <div id="nonedisplaybox1" class="nonedisplaybox"></div>
   <div id="nonedisplaybox2" class="nonedisplaybox"></div>
+  <div id="postandchatbox" class="nonedisplaybox"></div>
   <div id="searchSpace" class="nonedisplaybox"></div>
 </div>`;
   let container = document.querySelector(".container");
@@ -26,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { user: "peacee1Admin", password: "saocxdc", maccount_balance: "1000000" },
   ];
   const url = "http://localhost:8000/users";
+  const url1 = "http://localhost:8000/pic";
   let loginBox = document.querySelector(".loginBox");
   const picsSpace = [
     { id: "P1", name: "cat pics #1", price: 2, srcpic: "./pics/pic1.jpg" },
@@ -63,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const productSpace = [...picsSpace, ...memeSpace];
   const picsButton = document.getElementById("nonedisplaybox1");
   const memeButton = document.getElementById("nonedisplaybox2");
+  //In sản phẩm
   const renderListProduct = (wrapperElement, data) => {
     // wrapperElement: div mình apppend element vào
     // data: danh sách
@@ -88,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
       wrapperElement.appendChild(element);
     });
   };
+  //In giỏ hàng
   function renderCart(cartSpace, cartList) {
     cartSpace.innerHTML = "";
     cartList.forEach((cartobj) => {
@@ -128,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     memeButton.style.display = "none";
     searchSpace.style.display = "none";
+    postAndchatbox.style.display = "none";
     picsSpace.forEach((obj) => {
       renderListProduct(picsButton, picsSpace);
       let search = document.getElementById("search");
@@ -148,6 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     picsButton.style.display = "none";
     searchSpace.style.display = "none";
+    postAndchatbox.style.display = "none";
     memeSpace.forEach((obj) => {
       renderListProduct(memeButton, memeSpace);
       let search = document.getElementById("search");
@@ -157,6 +175,20 @@ document.addEventListener("DOMContentLoaded", function () {
         search.placeholder = "Search...";
       }
     });
+  });
+  //click cho post and chatbox
+  const postAndchatbox = document.getElementById("postandchatbox");
+  const postAndchatboxButton = document.getElementById("postAndchatbox");
+  postAndchatbox.innerHTML = "Vui lòng đăng nhập!!";
+  postAndchatboxButton.addEventListener("click", () => {
+    if (postAndchatbox.style.display == "flex") {
+      postAndchatbox.style.display = "none";
+    } else {
+      postAndchatbox.style.display = "flex";
+    }
+    memeButton.style.display = "none";
+    searchSpace.style.display = "none";
+    picsButton.style.display = "none";
   });
   /*   tạo sự kiện click cho giỏ hàng */
   const cart = document.getElementById("cart");
@@ -192,20 +224,121 @@ document.addEventListener("DOMContentLoaded", function () {
     log_in_container.appendChild(loginBTN);
     loginBox.innerHTML = "";
     loginBox.appendChild(log_in);
+
     loginBTN.addEventListener("click", () => {
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
+          let a = 0;
           data.forEach((user) => {
             if (
               username.value == user.username &&
               password.value == user.password
             ) {
-              userSpace.innerHTML = `user: ${user.username} <br> Account balance:${user.account_balance}$ `;
+              this_user_ID = user.id;
+              a += 1;
+              userSpace.innerHTML = `user: ${user.username} <br> <div class="accB">Account balance:<span class="accountBalance">${user.account_balance}$</span></div> `;
+              purchase_history_btn = document.createElement("button");
+              purchase_history_btn.innerHTML = "Purchase History";
+              userSpace.appendChild(purchase_history_btn);
+
+              purchase_history_btn.addEventListener("click", () => {
+                let purchase_history_box = document.querySelector(
+                  ".purchase_history_box"
+                );
+                if (purchase_history_box.style.display == "flex") {
+                  purchase_history_box.style.display = "none";
+                } else {
+                  purchase_history_box.innerHTML = "";
+                  purchase_history_box.style.width = "60%";
+                  purchase_history_box.style.minHeight = "300px";
+                  purchase_history_box.style.display = "flex";
+                  if (
+                    user.purchase_history.length == 0 ||
+                    user.purchase_history == undefined
+                  ) {
+                    purchase_history_box.innerHTML = "Bạn chưa mua gì";
+                  } else {
+                    user.purchase_history.forEach((item) => {
+                      purchase_history_box.innerHTML += `Tên sản phẩm:${
+                        item.name
+                      } giá:${item.price}$ số lượng:${item.quantity} ngày mua:${
+                        item.datetime
+                      } thành tiền:${item.price * item.quantity}$<br>`;
+                    });
+                  }
+                }
+              });
+
               loginBox.innerHTML = "";
-              user.account_status = "1";
+              //post and chatbox
+              postAndchatbox.innerHTML = "";
+
+              const post = document.createElement("div");
+              post.className = "post";
+              post.innerHTML = `Xin chào  ${user.username}, bạn có muốn post gì không?`;
+              const imgInput = document.createElement("input");
+              imgInput.type = "text";
+              imgInput.placeholder = "Link ảnh";
+              // imgInput.accept = ".jpg, .jpeg, .png";
+              const nameInput = document.createElement("input");
+              nameInput.type = "text";
+              nameInput.placeholder = "<NAME>";
+              const postBTN = document.createElement("button");
+              postBTN.innerHTML = "Post";
+              post.appendChild(imgInput);
+              post.appendChild(nameInput);
+              post.appendChild(postBTN);
+              postAndchatbox.appendChild(post);
+              postBTN.addEventListener("click", () => {
+                if (imgInput.value == "" || nameInput.value == "") {
+                  alert("Không được để trống");
+                } else {
+                  const poster = {
+                    name: nameInput.value,
+                    src: imgInput.value,
+                    poster: user.username,
+                  };
+                  fetch(url1, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(poster),
+                  });
+                  alert("Post thành công");
+                }
+              });
+              fetch(url1)
+                .then((response) => response.json())
+                .then((data) => {
+                  data.forEach((element) => {
+                    const element1 = document.createElement("div");
+                    element1.className = "element";
+                    const elementpics = document.createElement("img");
+                    elementpics.src = `${element.src}`;
+                    elementpics.alt = `Posted by ${element.poster}`;
+                    const elementName = document.createElement("p");
+                    elementName.innerHTML = `${element.name}`;
+                    const elementPoster = document.createElement("p");
+                    elementPoster.innerHTML = `Poster: ${element.poster}$`;
+                    const interact = document.createElement("div");
+                    interact.innerHTML = "<i class='bx bx-heart'></i>";
+                    element1.appendChild(elementpics);
+                    element1.appendChild(elementName);
+                    element1.appendChild(elementPoster);
+                    element1.appendChild(interact);
+                    postAndchatbox.appendChild(element1);
+                    interact.addEventListener("click", () => {
+                      interact.innerHTML = "<i class='bx bxs-heart' ></i>";
+                    });
+                  });
+                });
             }
           });
+          if (a == 0) {
+            alert("Sai thông tin!!!");
+          }
         })
         .catch((error) => {
           console.error("Lỗi khi lấy dữ liệu:", error);
@@ -243,14 +376,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
           // Duyệt qua từng phần tử trong mảng
           let peacee1 = 0;
+          if (username.value == "" || password.value == "") {
+            peacee1 += 1;
+            alert("Bỏ trống");
+          }
           data.forEach((user) => {
             if (username.value == user.username) {
               peacee1 += 1;
               alert("Username đã tồn tại");
-            }
-            if (username.value == "" || password.value == "") {
-              peacee1 += 1;
-              alert("Bỏ trống");
             }
           });
           if (peacee1 == 0) {
@@ -259,6 +392,7 @@ document.addEventListener("DOMContentLoaded", function () {
               password: password.value,
               account_balance: "0",
               account_status: "0",
+              purchase_history: [],
             };
             fetch(url, {
               method: "POST",
@@ -396,15 +530,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       const search_input_value = searchInput.value;
       productSpace.find((item) => {
-        //so sanh bang
         if (item.name.includes(search_input_value)) {
           searchItem.push(item);
         }
-        //index of js
-
-        //includes js
-
-        //tim kiem khong dau js
       });
       console.log(productSpace);
       if (searchItem.length == 0) {
@@ -443,17 +571,67 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
   const buyBTN = document.querySelector(".buy");
+  // Nút Buy
   buyBTN.addEventListener("click", () => {
-    console.log(6);
+    let accountBalance = document.querySelector(".accountBalance");
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        k = 0;
         data.forEach((user) => {
-          if (user.account_balance < total) {
-            alert("Bạn ko đủ tiền");
-          } else {
+          if (user.id == this_user_ID) {
+            k += 1;
+            this_account_balance = user.account_balance;
+            console.log(total);
+            console.log(this_account_balance);
+            if (this_account_balance < total) {
+              alert("Bạn ko đủ tiền");
+            } else {
+              const currentDate = new Date();
+
+              // Lấy thông tin về ngày và giờ
+              const day = currentDate.getDate();
+              const month = currentDate.getMonth() + 1; // Tháng bắt đầu từ 0, cần cộng thêm 1
+              const year = currentDate.getFullYear();
+              const hours = currentDate.getHours();
+              const minutes = currentDate.getMinutes();
+              const seconds = currentDate.getSeconds();
+
+              // Tạo một chuỗi hiển thị thông tin ngày giờ
+              const dateTimeString = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+              console.log(dateTimeString);
+              alert("Mua thành công");
+              yourcart.forEach((obj) => {
+                const item = {
+                  name: obj.name,
+                  price: obj.price,
+                  datetime: dateTimeString,
+                  quantity: obj.quantity,
+                };
+                this_purchase_history.push(item);
+              });
+              this_account_balance -= total;
+              accountBalance.innerHTML = this_account_balance;
+              this_purchase_history = [
+                ...this_purchase_history,
+                ...user.purchase_history,
+              ];
+              fetch(`http://localhost:8000/users/${this_user_ID}`, {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  account_balance: this_account_balance,
+                  purchase_history: this_purchase_history,
+                }),
+              });
+            }
           }
         });
+        if (k == 0) {
+          alert("vui lòng đăng nhập");
+        }
       });
   });
 });

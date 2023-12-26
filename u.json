@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "peacee1",
+      "password": "saocxdc",
+      "account_balance": "1000000"
+    }
+  ]
+}

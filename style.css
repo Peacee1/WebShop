@@ -52,6 +52,12 @@ body {
 }
 .user {
   margin: 20px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.accB {
+  display: flex;
 }
 .user button {
   border: none;
@@ -60,6 +66,7 @@ body {
   border-radius: 10px;
   width: 100px;
   transition: all 0.3s ease;
+  margin: 5px;
 }
 .user button:hover {
   background-color: black;
@@ -155,11 +162,13 @@ body {
   margin: 10px 10px;
   background-color: #e5a947;
 }
+
 .element img {
   width: 100px;
   height: 100px;
   margin: 10px;
 }
+
 .cartbox {
   position: fixed;
   background-color: black;
@@ -237,6 +246,29 @@ body {
   width: 80px;
 }
 .container {
+  display: flex;
+  flex-direction: column;
+}
+.purchase_history_box {
+  overflow: auto;
+  position: fixed;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #e5a947;
+  border: 5px solid black;
+  border-radius: 15px;
+  font-size: 16px;
+  max-height: 320px;
+}
+#postandchatbox {
+  color: white;
+  min-height: 200px;
+}
+.post {
   display: flex;
   flex-direction: column;
 }

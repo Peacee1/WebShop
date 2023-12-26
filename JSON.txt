@@ -1,10 +1,6 @@
 fetch(url)
   .then(response => response.json())
   .then(data => {
-    // data là mảng chứa tất cả các phần tử trong USERS
-    console.log('Dữ liệu từ server:', data);
-
-    // Duyệt qua từng phần tử trong mảng
     data.forEach(user => {
       console.log('ID:', user.id);
       console.log('Username:', user.username);
@@ -33,3 +29,14 @@ fetch(url, {
   .catch(error => {
     console.error('Lỗi khi thêm người dùng:', error);
   });
+  ------------------------------------------------------------------
+  fetch(`http://localhost:8000/users/${this_user_ID}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          account_status: "0",
+          account_balance: this_account_balance,
+        }),
+      });

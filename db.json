@@ -4,18 +4,202 @@
       "id": 1,
       "username": "peacee1",
       "password": "saocxdc",
-      "account_balance": "1000000"
+      "account_balance": 999706,
+      "purchase_history": [
+        {
+          "name": "cat meme #1",
+          "price": 2,
+          "datetime": "26/12/2023 17:27:35",
+          "quantity": 4
+        },
+        {
+          "name": "cat meme #7",
+          "price": 2,
+          "datetime": "26/12/2023 17:27:35",
+          "quantity": 4
+        },
+        {
+          "name": "cat pics #13",
+          "price": 2,
+          "datetime": "26/12/2023 16:17:31",
+          "quantity": 5
+        },
+        {
+          "name": "cat pics #6",
+          "price": 2,
+          "datetime": "26/12/2023 16:14:34",
+          "quantity": 4
+        },
+        {
+          "name": "cat pics #11",
+          "price": 2,
+          "datetime": "26/12/2023 16:14:34",
+          "quantity": 3
+        },
+        {
+          "name": "cat pics #13",
+          "price": 2,
+          "datetime": "26/12/2023 16:11:17",
+          "quantity": 1
+        },
+        {
+          "name": "cat pics #12",
+          "price": 2,
+          "datetime": "26/12/2023 16:11:17",
+          "quantity": 1
+        },
+        {
+          "name": "cat pics #11",
+          "price": 2,
+          "datetime": "26/12/2023 16:11:17",
+          "quantity": 1
+        },
+        {
+          "name": "cat pics #16",
+          "price": 2,
+          "datetime": "26/12/2023 16:11:17",
+          "quantity": 1
+        },
+        {
+          "name": "cat pics #17",
+          "price": 2,
+          "datetime": "26/12/2023 16:11:17",
+          "quantity": 1
+        },
+        {
+          "name": "cat pics #18",
+          "price": 2,
+          "datetime": "26/12/2023 16:11:17",
+          "quantity": 1
+        },
+        {
+          "name": "cat pics #21",
+          "price": 2,
+          "datetime": "26/12/2023 16:11:17",
+          "quantity": 1
+        },
+        {
+          "name": "cat pics #19",
+          "price": 2,
+          "datetime": "26/12/2023 16:11:17",
+          "quantity": 1
+        },
+        {
+          "name": "cat pics #20",
+          "price": 2,
+          "datetime": "26/12/2023 16:11:17",
+          "quantity": 1
+        },
+        {
+          "name": "cat pics #15",
+          "price": 2,
+          "datetime": "26/12/2023 16:11:17",
+          "quantity": 1
+        },
+        {
+          "name": "cat pics #1",
+          "price": 2,
+          "datetime": "26/12/2023 16:2:33",
+          "quantity": 4
+        },
+        {
+          "name": "cat pics #5",
+          "price": 2,
+          "datetime": "26/12/2023 15:51:46",
+          "quantity": 8
+        },
+        {
+          "name": "cat pics #3",
+          "price": 2,
+          "datetime": "26/12/2023 15:49:49",
+          "quantity": 4
+        },
+        {
+          "name": "cat pics #1",
+          "price": 2,
+          "datetime": "26/12/2023 15:47:37",
+          "quantity": 4
+        },
+        {
+          "name": "cat meme #5",
+          "price": 2,
+          "datetime": "26/12/2023 15:46:57",
+          "quantity": 5
+        },
+        {
+          "name": "cat pics #2",
+          "price": 2,
+          "datetime": "26/12/2023 15:45:9",
+          "quantity": 4
+        },
+        {
+          "name": "cat pics #3",
+          "price": 2,
+          "datetime": "26/12/2023 15:45:9",
+          "quantity": 4
+        },
+        {
+          "name": "cat pics #1",
+          "price": 2,
+          "datetime": "26/12/2023 15:44:22",
+          "quantity": 5
+        }
+      ]
     },
     {
-      "username": "peacee2",
-      "password": "saocxdc",
-      "account_balance": "0",
+      "username": "aTongngao",
+      "password": "123",
+      "account_balance": 890,
+      "account_status": "0",
+      "purchase_history": [
+        {
+          "name": "cat pics #9",
+          "price": 2,
+          "datetime": "26/12/2023 23:14:50",
+          "quantity": 8
+        },
+        {
+          "name": "cat pics #2",
+          "price": 2,
+          "datetime": "26/12/2023 23:12:28",
+          "quantity": 6
+        }
+      ],
       "id": 2
     },
     {
-      "username": "peacee3",
-      "password": "saocxdc",
-      "account_balance": "0",
+      "username": "chutum",
+      "password": "chutum",
+      "account_balance": 992,
+      "account_status": "0",
+      "purchase_history": [
+        {
+          "name": "cat pics #5",
+          "price": 2,
+          "datetime": "26/12/2023 18:18:11",
+          "quantity": 4
+        }
+      ],
+      "id": 3
+    }
+  ],
+  "pic": [
+    {
+      "id": 1,
+      "name": "cat meme #1",
+      "src": "./meme/meme1.jpg",
+      "poster": "peacee1"
+    },
+    {
+      "id": 2,
+      "name": "meo ngu",
+      "src": "https://catscanman.net/wp-content/uploads/2023/02/meme-buon-ngu-2-1024x670.png",
+      "poster": "peacee1"
+    },
+    {
+      "name": "mèo cute",
+      "src": "https://upanh123.com/wp-content/uploads/2020/11/hinh-anh-con-meo-cute3.jpg",
+      "poster": "aTongngao",
       "id": 3
     }
   ]
